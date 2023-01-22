@@ -14,6 +14,8 @@ import com.github.deepanshu.assignment.vo.DrugDetail;
 import com.github.deepanshu.assignment.vo.Error;
 import com.github.deepanshu.assignment.vo.ErrorResponse;
 import com.github.deepanshu.assignment.vo.ManufacturerName;
+import com.github.deepanshu.assignment.vo.MetaDetail;
+import com.github.deepanshu.assignment.vo.MetaResult;
 import com.github.deepanshu.assignment.vo.OpenFDABrandName;
 import com.github.deepanshu.assignment.vo.Result;
 
@@ -92,7 +94,12 @@ public class ServiceLayer {
 					}
 				}
 			}
+			MetaDetail metaDetail = new MetaDetail();
+			MetaResult metaResult = new MetaResult();
+			metaResult.setTotal(results.size());
+			metaDetail.setMetaResult(metaResult);
 			drugDetailResponse.setResultList(results);
+			drugDetailResponse.setMetaDetail(metaDetail);
 		} else {
 			return drugDetailResponse;
 		}
@@ -119,6 +126,12 @@ public class ServiceLayer {
 					}
 				}
 			}
+			MetaDetail metaDetail = new MetaDetail();
+			MetaResult metaResult = new MetaResult();
+			metaResult.setTotal(results.size());
+			metaDetail.setMetaResult(metaResult);
+			drugDetailResponse.setResultList(results);
+			drugDetailResponse.setMetaDetail(metaDetail);
 			drugDetailResponse.setResultList(results);
 		} else {
 			return drugDetailResponse;

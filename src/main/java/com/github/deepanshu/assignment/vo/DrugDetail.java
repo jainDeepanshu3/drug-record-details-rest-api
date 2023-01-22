@@ -22,7 +22,13 @@ public class DrugDetail {
 		this.resultList = resultList;
 	}
 	
-	
+	public MetaDetail getMetaDetail() {
+		return metaDetail;
+	}
+
+	public void setMetaDetail(MetaDetail metaDetail) {
+		this.metaDetail = metaDetail;
+	}
 
 	@Override
 	public String toString() {
