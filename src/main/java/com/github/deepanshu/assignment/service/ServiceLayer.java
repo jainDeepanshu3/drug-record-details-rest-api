@@ -13,6 +13,7 @@ import com.github.deepanshu.assignment.util.DrugRecordUtil;
 import com.github.deepanshu.assignment.vo.DrugDetail;
 import com.github.deepanshu.assignment.vo.Error;
 import com.github.deepanshu.assignment.vo.ErrorResponse;
+import com.github.deepanshu.assignment.vo.ManufacturerName;
 import com.github.deepanshu.assignment.vo.OpenFDABrandName;
 import com.github.deepanshu.assignment.vo.Result;
 
@@ -45,6 +46,11 @@ public class ServiceLayer {
 		String drugDetailResponseJson = null;
 		try {
 			drugDetailResponse = restTemplate.getForObject(drugsfdaApi, DrugDetail.class);
+			
+			/**
+			 * Filter Drug Details response based on manufacturer name
+			 **/
+			drugDetailResponse = updateDrugRecordDetilBasedOnManufacturerName(drugDetailResponse, manufacturerName);
 
 			/**
 			 * Filter Drug Details response based on brand name
@@ -65,6 +71,32 @@ public class ServiceLayer {
 			return drugRecordUtil.ObjectToJsonString(errorResponse);
 		}
 		return drugDetailResponseJson;
+	}
+	
+	private DrugDetail updateDrugRecordDetilBasedOnManufacturerName(DrugDetail drugDetailResponse, String manufacturerName) {
+		List<Result> results = drugDetailResponse.getResultList();
+
+		if (results != null && results.size() > 0) {
+			for (int i = results.size() - 1; i >= 0; i--) {
+				List<ManufacturerName> openFDManufacturerNamesList = results.get(i).getOpenfdaDetail()
+						.getManufacturerNameList();
+				if (openFDManufacturerNamesList != null && openFDManufacturerNamesList.size() > 0) {
+					boolean isManufacturerNameExisit = false;
+					for (ManufacturerName openFDAManufacturerName : openFDManufacturerNamesList) {
+						if (openFDAManufacturerName.getManufacturerName().toLowerCase().contains(manufacturerName.toLowerCase())) {
+							isManufacturerNameExisit = true;
+						}
+					}
+					if (!isManufacturerNameExisit) {
+						results.remove(i);
+					}
+				}
+			}
+			drugDetailResponse.setResultList(results);
+		} else {
+			return drugDetailResponse;
+		}
+		return drugDetailResponse;
 	}
 
 	private DrugDetail updateDrugRecordDetilBasedOnBrandName(DrugDetail drugDetailResponse, String brandName) {
@@ -87,9 +119,7 @@ public class ServiceLayer {
 					}
 				}
 			}
-
 			drugDetailResponse.setResultList(results);
-			System.out.print("updatedd list" + drugDetailResponse);
 		} else {
 			return drugDetailResponse;
 		}
