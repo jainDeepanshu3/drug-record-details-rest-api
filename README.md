@@ -1,7 +1,7 @@
 # drug-record-detail-application finder:
 
 drug-record-details-rest-api project was created for fetching Drug Record Application Details. REST API end-point;  
-- Get all matched record details based on search fields. 
+- Get all matched record details based on search fields.
 
 ## Technology stack
 * The project uses `JDK 1.8`, you have to install it first on your local machine if you want to develop the API.
@@ -10,11 +10,10 @@ drug-record-details-rest-api project was created for fetching Drug Record Applic
 * Use Swagger for Graphical repesentation of REST API. 
 * Junit test cases based on mokito framework.
 
+
 ## Running locally
-* Clone project to local machine and open it in your favorite editor, and Run main spring-boot class `DrugRecordDetailApplication`.
-OR
 Run below command to launch backend rest api locally:
-java -jar java -jar drug-record-details-rest-api-0.0.1-SNAPSHOT.jar
+java -jar drug-record-details-rest-api-0.0.1-SNAPSHOT.jar
 
 ## App info via standard actuator here: 
 http://localhost:8082/api.fda.gov/drug/drugsfda.json?manufacturerName=`
