@@ -1,7 +1,7 @@
 # drug-record-detail-application finder:
 
 drug-record-details-rest-api project was created for fetching Drug Record Application Details. REST API end-point;  
-- Get one product 
+- Get all matched record details based on search fields. 
 
 ## Technology stack
 * The project uses `JDK 1.8`, you have to install it first on your local machine if you want to develop the API.
