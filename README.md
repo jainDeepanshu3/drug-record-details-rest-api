@@ -13,6 +13,7 @@ drug-record-details-rest-api project was created for fetching Drug Record Applic
 
 ## Running locally
 Run below command to launch backend rest api locally:
+
 java -jar drug-record-details-rest-api-0.0.1-SNAPSHOT.jar
 
 ## App info via standard actuator here: 
